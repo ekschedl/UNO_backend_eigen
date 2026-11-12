@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>UNO – Spiel</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/png" href="uno.png" />
+  </head>
+
+  <body class="theme-wood">
+    <!-- === HEADER: Spieltitel & Statusanzeige === -->
+    <header id="unoStatus" class="uno-logo-fixed">
+      <h1 class="title">UNO</h1>
+      <p class="subtitle">Willkommen</p>
+    </header>
+
+    <!-- === MAIN: Hauptinhalt (Spielerwahl & Start) === -->
+    <main>
+      <h2 id="setupTitle">Wähle die Spielernamen</h2>
+
+      <!--eine Eingabe-Sammlung ist, die abgeschickt wird.-->
+      <form id="playerForm">
+        <div class="cards">
+          <!-- JE NAME EINE LABEL+INPUT KOMBINATION → sehr gut für Accessibility -->
+          <div class="name-card">
+            <label for="p1">Spieler 1</label>
+            <input id="p1" placeholder="Katja" autofocus />
+          </div>
+
+          <div class="name-card">
+            <label for="p2">Spieler 2</label>
+            <input id="p2" placeholder="Valerie" />
+          </div>
+
+          <div class="name-card">
+            <label for="p3">Spieler 3</label>
+            <input id="p3" placeholder="Sara" />
+          </div>
+
+          <div class="name-card">
+            <label for="p4">Spieler 4</label>
+            <input id="p4" placeholder="Max" />
+          </div>
+        </div>
+
+        <button id="startBtn" type="submit">Start</button>
+
+        <div id="errorMsg" role="alert"></div>
+      </form>
+      <!-- === GEWINN-OVERLAY === -->
+      <div id="winnerOverlay" class="winner-overlay gone">
+        <div class="winner-box">
+          <h2 id="winnerName"></h2>
+          <p id="winnerSummary"></p>
+          <p id="winnerStandings"></p>
+          <button id="winnerClose" type="button">Nächste Runde</button>
+        </div>
+      </div>
+    </main>
+
+    <!-- FOOTER = Bereich für Navigation / zusätzliche Funktionen -->
+    <footer>
+      <div class="bottom-menu">
+        <button
+          id="btnRules"
+          class="menu-icon"
+          aria-label="Regeln anzeigen"
+          data-tip="Regeln anzeigen"
+        >
+          💡
+        </button>
+        <button
+          id="btnToggleTheme"
+          class="menu-icon"
+          aria-label="Theme wechseln"
+          data-tip="Theme wechseln"
+        >
+          🎄
+        </button>
+
+        <!-- Musik-Button -->
+        <button
+          id="musicToggle"
+          class="music-btn"
+          aria-label="Musik an/aus"
+          data-tip="Musik an/aus"
+        >
+          🔊
+        </button>
+        <!-- Spiel beenden -->
+        <button
+          id="btnEndGame"
+          class="menu-icon endgame-icon"
+          aria-label="Spiel beenden"
+          data-tip="Spiel beenden"
+        >
+          <svg
+            width="28"
+            height="28"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M9 12h11"></path>
+            <path d="M15 8l5 4-5 4"></path>
+            <path d="M3 5v14a2 2 0 0 0 2 2h6"></path>
+            <path d="M11 1H5a2 2 0 0 0-2 2v4"></path>
+          </svg>
+        </button>
+
+        <button id="menuToggle" data-tip="Menü öffnen">
+          <!-- Icon wird per JS eingesetzt -->
+        </button>
+      </div>
+    </footer>
+
+    <!--  Hier kommt der mobile Bereich -->
+    <div id="mobileStack"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
