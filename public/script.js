@@ -1,16 +1,18 @@
+// Live Server nutzt den lokalen Node-Server. Online laufen Seite und API unter derselben Adresse.
+const gameApi = location.origin === "http://127.0.0.1:5500" ? "http://127.0.0.1:3000" : "";
+
 // ============================================================
 // GRUPPE 1: DOM-ELEMENTE + GLOBALE VARIABLEN
 // ============================================================
 
 const startButton = document.getElementById("startBtn");
-const unoLogoText = document.querySelector(".uno-logo-fixed .title"); // "UNO"
+const unoLogoText = document.querySelector(".uno-logo-fixed .title");
 const unoStatusText = document.querySelector("header .subtitle"); //  "Willkommen" / "läuft..."
 const nameInputs = document.querySelectorAll(".name-card input"); // Eingabefelder
 const setupTitle = document.getElementById("setupTitle"); // "Wähle die Spielernamen"
 const errorBox = document.getElementById("errorMsg"); // Fehlermeldungen
 const playerForm = document.getElementById("playerForm");
 const musicBtn = document.getElementById("musicToggle");
-const btnRules = document.getElementById("btnRules");
 const btnToggleTheme = document.getElementById("btnToggleTheme");
 const btnEndGame = document.getElementById("btnEndGame");
 const body = document.body;
@@ -179,15 +181,6 @@ function ladeMusikDatei(name) {
 //Spiel wird beendet, indem die Seite neu geladen wird -> neuer Spielstart möglich
 btnEndGame.addEventListener("click", () => {
   location.reload();
-});
-
-// REGELN POPUP
-//Anleitung wird in neuem Browser-Fenster (_blank) geöffnet
-btnRules.addEventListener("click", () => {
-  window.open(
-    "https://www.uno-kartenspiel.de/wp-content/uploads/2019/08/UNO-Spielregeln-Anleitung.pdf",
-    "_blank",
-  );
 });
 
 /* ============================================================
@@ -431,7 +424,7 @@ async function starteServerSpiel(spielerNamen) {
   try {
     //damit Fehler abgefangen werden
     const antwortVomServer = await fetch(
-      "http://127.0.0.1:3000/Api/Game/Start",
+      `${gameApi}/Api/Game/Start`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -827,7 +820,7 @@ async function spieleKarteZumServer(
   wildColor,
 ) {
   const url =
-    `http://127.0.0.1:3000/Api/Game/PlayCard/${gameId}` +
+    `${gameApi}/Api/Game/PlayCard/${gameId}` +
     `?value=${karte.Value}` +
     `&color=${karte.Color}` +
     `&wildColor=${wildColor ?? ""}`;
@@ -938,7 +931,7 @@ function aktualisiereRichtungspfeil(karte) {
 ============================================================ */
 
 async function karteZiehen() {
-  const url = `http://127.0.0.1:3000/Api/Game/DrawCard/${gameId}`;
+  const url = `${gameApi}/Api/Game/DrawCard/${gameId}`;
   const response = await fetch(url, { method: "PUT" });
   const daten = await response.json();
 
@@ -977,7 +970,7 @@ async function karteZiehen() {
 ============================================================ */
 
 async function aktualisiereHandUndPunkte(playerName) {
-  const url = `http://127.0.0.1:3000/Api/Game/GetCards/${gameId}?playerName=${encodeURIComponent(
+  const url = `${gameApi}/Api/Game/GetCards/${gameId}?playerName=${encodeURIComponent(
     playerName,
   )}`;
   const response = await fetch(url);
@@ -997,7 +990,6 @@ async function aktualisiereHandUndPunkte(playerName) {
     const img = erstelleKarte(karte, playerName, i);
     hand.appendChild(img);
   }
-  updateKartenGroesse(hand);
   updateScore(playerName, daten.Score);
 
 }
@@ -1151,7 +1143,7 @@ document.getElementById("winnerClose").addEventListener("click", async (event) =
   button.disabled = true;
 
   try {
-    const response = await fetch(`http://127.0.0.1:3000/Api/Game/NextRound/${gameId}`, {
+    const response = await fetch(`${gameApi}/Api/Game/NextRound/${gameId}`, {
       method: "POST",
     });
 
@@ -1186,21 +1178,21 @@ document.getElementById("winnerClose").addEventListener("click", async (event) =
 
 // nur der aktive Spieler mit ENTER ziehen darf
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Enter") {
-    if (aktuellerSpieler) {
-      karteZiehen();
-    }
+  if (event.key === "Enter" && aktuellerSpieler && !event.target.closest?.("a, button, input")) {
+    karteZiehen();
   }
 });
 
 /* ======== Schnee================================*/
 
 function startSnow() {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
   const snowContainer = document.createElement("div");
   snowContainer.id = "snow-container";
+  snowContainer.setAttribute("aria-hidden", "true");
   document.body.appendChild(snowContainer);
 
-  //
   const interval = setInterval(() => {
     if (!document.body.classList.contains("theme-xmas")) {
       stopSnow();
@@ -1209,21 +1201,21 @@ function startSnow() {
 
     const snow = document.createElement("div");
     snow.classList.add("snowflake");
-    snow.textContent = "❄️";
-
-    const size = Math.random() * 14 + 12; // 12–26px — größer, ruhiger
-    const left = Math.random() * 100; // Position
-    const duration = Math.random() * 4 + 7; // 7–11s — viel langsamer!
+    const size = Math.random() * 5 + 4;
+    const left = Math.random() * 100;
+    const duration = Math.random() * 4 + 10;
 
     snow.style.left = left + "vw";
-    snow.style.fontSize = size + "px";
+    snow.style.width = size + "px";
+    snow.style.height = size + "px";
     snow.style.animationDuration = duration + "s";
+    snow.style.setProperty("--snow-drift", (Math.random() * 60 - 30) + "px");
 
     snowContainer.appendChild(snow);
 
     // Entfernen sobald unten
     setTimeout(() => snow.remove(), duration * 1000);
-  }, Math.random() * 200 + 350); // 350–550ms pro neue Flocke
+  }, 300);
 
   window._snowInterval = interval;
 }
@@ -1235,25 +1227,4 @@ function stopSnow() {
 // Automatisch Schnee starten, wenn Xmas aktiv ist
 if (document.body.classList.contains("theme-xmas")) {
   startSnow();
-}
-
-function updateKartenGroesse(hand) {
-  const anzahl = hand.children.length;
-
-  let width = 60; // Standardgröße
-  let height = 90;
-
-  if (anzahl >= 13) {
-    width = 38;
-    height = 57;
-  } else if (anzahl >= 10) {
-    width = 45;
-    height = 68;
-  } else if (anzahl >= 8) {
-    width = 52;
-    height = 78;
-  }
-
-  document.documentElement.style.setProperty("--card-width", width + "px");
-  document.documentElement.style.setProperty("--card-height", height + "px");
 }

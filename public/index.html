@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>UNO – Spiel</title>
+    <title>CAMPUS02 – Kartenspiel</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="icon" type="image/png" href="uno.png" />
   </head>
@@ -11,7 +11,7 @@
   <body class="theme-wood">
     <!-- === HEADER: Spieltitel & Statusanzeige === -->
     <header id="unoStatus" class="uno-logo-fixed">
-      <h1 class="title">UNO</h1>
+      <h1 class="title">CAMPUS02</h1>
       <p class="subtitle">Willkommen</p>
     </header>
 
@@ -62,14 +62,16 @@
     <!-- FOOTER = Bereich für Navigation / zusätzliche Funktionen -->
     <footer>
       <div class="bottom-menu">
-        <button
-          id="btnRules"
+        <a
           class="menu-icon"
-          aria-label="Regeln anzeigen"
-          data-tip="Regeln anzeigen"
+          href="campus02-spielregeln.pdf"
+          target="_blank"
+          rel="noopener"
+          aria-label="Spielregeln als PDF öffnen"
+          data-tip="Spielregeln als PDF öffnen"
         >
           💡
-        </button>
+        </a>
         <button
           id="btnToggleTheme"
           class="menu-icon"

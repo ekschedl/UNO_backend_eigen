@@ -1,20 +1,26 @@
 const express = require("express"); //lädt Express
-const cors = require("cors"); //etzt erlauben wir deiner UNO-Seite den Zugriff
+const cors = require("cors");
+const path = require("node:path");
 
 const app = express(); //erstellt die Server-App und gibt ihr den Namen app
 const spiele = new Map();
 
+// Live Server bleibt als lokale Alternative verfügbar.
 app.use(cors({ origin: "http://127.0.0.1:5500" }));
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
 
 const { randomUUID } = require("node:crypto");
 
-app.listen(3000, "127.0.0.1", () => {
-  console.log("Mein UNO-Server läuft auf Port 3000");
+const port = Number(process.env.PORT ?? 3000);
+const host = process.env.PORT ? "0.0.0.0" : "127.0.0.1";
+
+app.listen(port, host, () => {
+  console.log(`Der Spielserver läuft auf Port ${port}`);
 });
 
-app.get("/", (req, res) => {
-  res.send("Hallo vom UNO-Backend!");
+app.get("/healthz", (_req, res) => {
+  res.sendStatus(200);
 });
 
 function mischeKarten(stapel) {
