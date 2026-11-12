@@ -362,18 +362,19 @@ function zeigeStartOverlay(spielerNamen) {
   setzeStatusText("startet…", true);
 
   const farben = ["#e63b2e", "#2185d0", "#21ba45", "#f7c600"];
-  let namenHTML = "";
-
-  for (let i = 0; i < spielerNamen.length; i++) {
-    namenHTML += `<span style='color:${farben[i]}'>${spielerNamen[
-      i
-    ].toUpperCase()}</span>&emsp;`;
-  }
-
   const overlay = zeigeOverlay(`
-    <p>Spiel startet mit:<br>${namenHTML}</p>
+    <p>Spiel startet mit:<br><span class="start-spielernamen"></span></p>
     <small>(Klick oder warte kurz...)</small>
   `);
+
+  // Namen kommen aus der Eingabe und werden als Text eingefügt.
+  const namenListe = overlay.querySelector(".start-spielernamen");
+  spielerNamen.forEach((name, index) => {
+    const span = document.createElement("span");
+    span.style.color = farben[index];
+    span.textContent = name.toUpperCase();
+    namenListe.append(span, " ");
+  });
 
   // Damit das Overlay nur einmal geschlossen wird
   let overlaySchonGeschlossen = false;
@@ -743,7 +744,7 @@ function highlightAktivenSpieler(name) {
     const feld = nameInputs[i];
     const box = feld.parentElement;
 
-    const spielerName = feld.value.split("—")[0].trim();
+    const spielerName = spielerNamen[i];
 
     if (spielerName === name) {
       box.classList.add("active-player");
@@ -957,7 +958,7 @@ async function karteZiehen() {
   img.dataset.card = JSON.stringify(daten.Card);
 
   const hand = document.querySelector(
-    `.player-hand[data-player="${daten.Player}"]`,
+    `.player-hand[data-player="${CSS.escape(daten.Player)}"]`,
   );
 
   hand.appendChild(img);
@@ -979,7 +980,7 @@ async function aktualisiereHandUndPunkte(playerName) {
   console.log("Aktuelle Karten für", playerName, daten);
 
   const hand = document.querySelector(
-    `.player-hand[data-player="${playerName}"]`,
+    `.player-hand[data-player="${CSS.escape(playerName)}"]`,
   );
   if (!hand) return;
 

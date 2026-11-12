@@ -1,10 +1,21 @@
-# UNO_backend_eigen
+# Kartenspiel für vier Personen
 
-## NowaUno
+Dieses Lernprojekt entstand im Dezember 2025 im Rahmen meiner Ausbildung an der **FH CAMPUS 02**. Wir entwickelten die Browser-Oberfläche im Team, um die Arbeit mit JavaScript und einer REST-API zu üben. Die Spiellogik lief damals über ein Backend, das im Kurs bereitgestellt wurde. [Ursprüngliches Teamprojekt](https://github.com/ekschedl/NowaUno)
 
-Ziel des Projekts ist es ein funktionierendes UNO Front-End zum bestehenden Backend zu entwicklen. Die Kommunikation zur Backend-Spiellogik wird über eine - in den Kursunterlagen zur Verfügung gestellte - API abgewickelt.
+## Meine Weiterentwicklung
 
-Die Anforderungen an das Front-End lauten wie folgt:
+In diesem Repository führe ich das Projekt mit einem eigenen Backend in **Node.js und Express** weiter. Der Server teilt die Karten aus, prüft Spielzüge und verwaltet Runden und Punkte. Ich habe außerdem ein eigenes Kartendesign, ein Wintertheme und eine Anleitung ergänzt. Vier Personen spielen gemeinsam an einem Bildschirm.
+
+## Lokal starten
+
+```bash
+npm ci
+npm start
+```
+
+Danach das Spiel unter [127.0.0.1:3000](http://127.0.0.1:3000/) öffnen. Der Server liefert sowohl die Spieloberfläche als auch die API aus. Die Runden werden im Arbeitsspeicher gespeichert und enden bei einem Serverneustart.
+
+## Ursprüngliche Aufgabenstellung aus dem Kurs
 
 Das Uno-Spiel muss:
 1. Muss dem Player die Möglichkeit geben 4 Namen einzugeben
