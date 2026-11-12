@@ -656,6 +656,10 @@ main h2 {
     -webkit-filter 2.2s ease;
   transition: background-position 3.5s ease-in-out, transform 0.8s ease,
     -webkit-filter 2.2s ease;
+  transition: background-position 3.5s ease-in-out, transform 0.8s ease,
+    -webkit-filter 2.2s ease;
+  transition: background-position 3.5s ease-in-out, transform 0.8s ease,
+    -webkit-filter 2.2s ease;
   transition: background-position 3.5s ease-in-out, filter 2.2s ease,
     transform 0.8s ease;
   transition: background-position 3.5s ease-in-out, filter 2.2s ease,
@@ -1774,5 +1778,49 @@ main:has(#playerForm:not(.gone)) h2 {
 
   .name-card.to-corner label {
     font-size: 9px;
+  }
+}
+
+/* =========================================
+   SPIELERANZEIGEN – TEXT VOLLSTÄNDIG
+   ========================================= */
+
+.name-card.to-corner {
+  width: clamp(190px, 24vw, 300px);
+  max-width: calc(50vw - 24px);
+  height: 55px;
+}
+
+.name-card.to-corner input {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  padding: 0 4px;
+
+  font-size: clamp(10px, 1.05vw, 14px) !important;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-align: left;
+  text-overflow: clip;
+}
+
+.name-card.to-corner:nth-child(1),
+.name-card.to-corner:nth-child(4) {
+  left: 12px;
+}
+
+.name-card.to-corner:nth-child(2),
+.name-card.to-corner:nth-child(3) {
+  right: 12px;
+}
+
+@media (max-width: 600px) {
+  .name-card.to-corner {
+    width: calc(50vw - 20px);
+    height: 44px;
+  }
+
+  .name-card.to-corner input {
+    font-size: 10px !important;
   }
 }
