@@ -46,6 +46,26 @@ body.theme-xmas .name-card {
   border-color: rgba(255, 255, 255, 0.85);
 }
 
+body.theme-xmas .name-card input::-webkit-input-placeholder {
+  color: #15354b !important;
+  caret-color: #15354b;
+}
+
+body.theme-xmas .name-card input::-moz-placeholder {
+  color: #15354b !important;
+  caret-color: #15354b;
+}
+
+body.theme-xmas .name-card input:-ms-input-placeholder {
+  color: #15354b !important;
+  caret-color: #15354b;
+}
+
+body.theme-xmas .name-card input::-ms-input-placeholder {
+  color: #15354b !important;
+  caret-color: #15354b;
+}
+
 body.theme-xmas .name-card input,
 body.theme-xmas .name-card input::placeholder {
   color: #15354b !important;
@@ -95,14 +115,62 @@ body.theme-wood .name-card input {
 }
 
 /* Spielerplatzhalter-Farben */
+body.theme-wood #p1::-webkit-input-placeholder {
+  color: #e63b2e !important;
+}
+body.theme-wood #p1::-moz-placeholder {
+  color: #e63b2e !important;
+}
+body.theme-wood #p1:-ms-input-placeholder {
+  color: #e63b2e !important;
+}
+body.theme-wood #p1::-ms-input-placeholder {
+  color: #e63b2e !important;
+}
 body.theme-wood #p1::placeholder {
   color: #e63b2e !important;
+}
+body.theme-wood #p2::-webkit-input-placeholder {
+  color: #2185d0 !important;
+}
+body.theme-wood #p2::-moz-placeholder {
+  color: #2185d0 !important;
+}
+body.theme-wood #p2:-ms-input-placeholder {
+  color: #2185d0 !important;
+}
+body.theme-wood #p2::-ms-input-placeholder {
+  color: #2185d0 !important;
 }
 body.theme-wood #p2::placeholder {
   color: #2185d0 !important;
 }
+body.theme-wood #p3::-webkit-input-placeholder {
+  color: #21ba45 !important;
+}
+body.theme-wood #p3::-moz-placeholder {
+  color: #21ba45 !important;
+}
+body.theme-wood #p3:-ms-input-placeholder {
+  color: #21ba45 !important;
+}
+body.theme-wood #p3::-ms-input-placeholder {
+  color: #21ba45 !important;
+}
 body.theme-wood #p3::placeholder {
   color: #21ba45 !important;
+}
+body.theme-wood #p4::-webkit-input-placeholder {
+  color: #ffe760 !important;
+}
+body.theme-wood #p4::-moz-placeholder {
+  color: #ffe760 !important;
+}
+body.theme-wood #p4:-ms-input-placeholder {
+  color: #ffe760 !important;
+}
+body.theme-wood #p4::-ms-input-placeholder {
+  color: #ffe760 !important;
 }
 body.theme-wood #p4::placeholder {
   color: #ffe760 !important;
@@ -133,8 +201,11 @@ body.theme-xmas .snowflake {
   color: white;
   z-index: 70;
   pointer-events: none;
+  -webkit-animation-name: fall;
   animation-name: fall;
+  -webkit-animation-timing-function: linear;
   animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
 }
 
@@ -278,7 +349,8 @@ main h2 {
   border-radius: 4px;
   background: var(--player-label-bg);
   color: #fff;
-  text-shadow: 0 0 4px rgba(255, 255, 255, 0.45), 0 1px 2px rgba(20, 22, 27, 0.65);
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.45),
+    0 1px 2px rgba(20, 22, 27, 0.65);
   font-size: 0.82rem;
   font-weight: 750;
   line-height: 1.2;
@@ -302,6 +374,22 @@ main h2 {
 .name-card input:focus {
   outline: none !important;
   box-shadow: none !important;
+}
+
+.name-card input::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.name-card input::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.name-card input:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.name-card input::-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .name-card input::placeholder {
@@ -418,6 +506,8 @@ main h2 {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
+  -webkit-animation: unoColorWave 2.2s ease-in-out forwards;
+
   animation: unoColorWave 2.2s ease-in-out forwards;
 }
 
@@ -436,17 +526,22 @@ main h2 {
   color: #fffaf1;
 
   opacity: 1;
+  -webkit-filter: blur(0px);
   filter: blur(0px);
+  transition: opacity 0.4s ease, -webkit-filter 0.4s ease;
   transition: opacity 0.4s ease, filter 0.4s ease;
+  transition: opacity 0.4s ease, filter 0.4s ease, -webkit-filter 0.4s ease;
 }
 
 .subtitle.is-fading-out {
   opacity: 0;
+  -webkit-filter: blur(4px);
   filter: blur(4px);
 }
 
 .subtitle.is-fading-in {
   opacity: 1;
+  -webkit-filter: blur(0px);
   filter: blur(0px);
 }
 
@@ -468,7 +563,10 @@ main h2 {
   padding: 10px 6px;
   opacity: 0;
 
+  -webkit-animation: appearHand 0.8s ease forwards;
+
   animation: appearHand 0.8s ease forwards;
+  -webkit-animation-delay: var(--delay, 0s);
   animation-delay: var(--delay, 0s);
 }
 
@@ -480,6 +578,7 @@ main h2 {
 
   /* dadurch können Flip-Animationen sauber laufen */
   transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 
   transition: transform 0.35s ease, opacity 0.35s ease, box-shadow 0.25s ease;
@@ -540,8 +639,12 @@ main h2 {
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
   pointer-events: none;
+  transition: background-position 3.5s ease-in-out, transform 0.8s ease,
+    -webkit-filter 2.2s ease;
   transition: background-position 3.5s ease-in-out, filter 2.2s ease,
     transform 0.8s ease;
+  transition: background-position 3.5s ease-in-out, filter 2.2s ease,
+    transform 0.8s ease, -webkit-filter 2.2s ease;
 }
 
 /* Weihnachtsversion vom Pfeil */
@@ -637,6 +740,7 @@ main h2 {
   width: 100%;
   height: 100%;
   border-radius: 8px;
+  -o-object-fit: cover;
   object-fit: cover;
 }
 
@@ -649,12 +753,16 @@ main h2 {
 body.blurred main,
 body.blurred footer,
 body.blurred #mobileStack {
+  -webkit-filter: blur(6px);
   filter: blur(6px);
+  transition: -webkit-filter 0.3s ease;
   transition: filter 0.3s ease;
+  transition: filter 0.3s ease, -webkit-filter 0.3s ease;
 }
 
 /* ganz wichtig: Header NIE blur */
 body.blurred header.uno-logo-fixed {
+  -webkit-filter: none !important;
   filter: none !important;
   z-index: 9999;
 }
@@ -697,6 +805,8 @@ body.blurred header.uno-logo-fixed {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.05);
 
   border: 1px solid rgba(255, 220, 130, 0.4);
+
+  -webkit-animation: popupModern 0.45s ease forwards;
 
   animation: popupModern 0.45s ease forwards;
 }
@@ -752,6 +862,7 @@ body.blurred header.uno-logo-fixed {
 .fade-away {
   opacity: 0;
   transform: translateY(-10px) scale(0.95);
+  -webkit-filter: blur(4px);
   filter: blur(4px);
   transition: all 0.4s ease;
   pointer-events: none;
@@ -773,45 +884,69 @@ body.blurred header.uno-logo-fixed {
 @-webkit-keyframes unoColorWave {
   0% {
     background-position: 0% 50%;
+    -webkit-filter: brightness(1);
     filter: brightness(1);
   }
   50% {
     background-position: 80% 50%;
+    -webkit-filter: brightness(1.15);
     filter: brightness(1.15);
   }
   100% {
     background-position: 50% 50%;
+    -webkit-filter: brightness(1.02);
     filter: brightness(1.02);
   }
 }
 @keyframes unoColorWave {
   0% {
     background-position: 0% 50%;
+    -webkit-filter: brightness(1);
     filter: brightness(1);
   }
   50% {
     background-position: 80% 50%;
+    -webkit-filter: brightness(1.15);
     filter: brightness(1.15);
   }
   100% {
     background-position: 50% 50%;
+    -webkit-filter: brightness(1.02);
     filter: brightness(1.02);
   }
 }
 
 /* Einblenden von Handpunkten / Name */
 .hand-score-appear {
+  -webkit-animation: handScoreFade 0.5s ease forwards;
   animation: handScoreFade 0.5s ease forwards;
 }
 
-@keyframes handScoreFade {
+@-webkit-keyframes handScoreFade {
   0% {
     opacity: 0;
+    -webkit-filter: blur(4px);
     filter: blur(4px);
     transform: translateY(-4px) scale(0.98);
   }
   100% {
     opacity: 1;
+    -webkit-filter: blur(0);
+    filter: blur(0);
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes handScoreFade {
+  0% {
+    opacity: 0;
+    -webkit-filter: blur(4px);
+    filter: blur(4px);
+    transform: translateY(-4px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    -webkit-filter: blur(0);
     filter: blur(0);
     transform: translateY(0) scale(1);
   }
@@ -827,7 +962,24 @@ body .name-card.active-player {
 
 /* "Falsch gespielt!" – Wackeln */
 .shake {
+  -webkit-animation: shakeAnim 0.4s ease;
   animation: shakeAnim 0.4s ease;
+}
+
+@-webkit-keyframes shakeAnim {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-4px);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+  75% {
+    transform: translateX(-4px);
+  }
 }
 
 @keyframes shakeAnim {
@@ -915,6 +1067,7 @@ body .name-card.active-player {
     0 0 18px rgba(255, 255, 255, 0.35) inset;
 
   text-align: center;
+  -webkit-animation: winnerPop 0.45s ease forwards;
   animation: winnerPop 0.45s ease forwards;
   border: 2px solid rgba(255, 255, 255, 0.8);
 }
@@ -956,6 +1109,16 @@ body .name-card.active-player {
   background: #fff8d1;
 }
 /* Popup Animation */
+@-webkit-keyframes winnerPop {
+  0% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
 @keyframes winnerPop {
   0% {
     transform: scale(0.7);
@@ -1012,6 +1175,17 @@ body.theme-xmas .snowflake {
   border-radius: 50%;
   background: #fffdf8;
   box-shadow: 0 0 3px rgba(26, 81, 112, 0.6);
+}
+
+@-webkit-keyframes fall {
+  from {
+    transform: translateY(-10vh);
+    opacity: 0.95;
+  }
+  to {
+    transform: translate(var(--snow-drift), 110vh);
+    opacity: 0.75;
+  }
 }
 
 @keyframes fall {
@@ -1078,6 +1252,7 @@ body.theme-wood .snowflake {
     0 0 18px rgba(255, 255, 255, 0.35) inset;
 
   text-align: center;
+  -webkit-animation: winnerPop 0.45s ease forwards;
   animation: winnerPop 0.45s ease forwards;
   border: 2px solid rgba(255, 255, 255, 0.8);
 }
@@ -1387,7 +1562,20 @@ body.theme-wood .bottom-menu .music-btn:hover {
   }
 }
 .music-btn.playing {
+  -webkit-animation: pulse 1.4s infinite ease-in-out;
   animation: pulse 1.4s infinite ease-in-out;
+}
+
+@-webkit-keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.12);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 @keyframes pulse {
@@ -1399,5 +1587,152 @@ body.theme-wood .bottom-menu .music-btn:hover {
   }
   100% {
     transform: scale(1);
+  }
+}
+
+/* ==========================================
+   RESPONSIVE STARTSCREEN
+   Desktop / Tablet / Smartphone
+   ========================================== */
+
+/* Startbereich zentrieren */
+main:has(#playerForm:not(.gone)) {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 140px 24px 80px;
+}
+
+/* Überschrift */
+main:has(#playerForm:not(.gone)) h2 {
+  margin: 0 0 3rem;
+  font-size: clamp(1.5rem, 3.5vw, 3rem);
+  text-align: center;
+}
+
+/* Formular */
+#playerForm {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+/* Vier Spielerfelder */
+#playerForm .cards {
+  width: min(100%, 850px);
+  margin: 0 auto;
+  padding: 0;
+
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  -moz-column-gap: clamp(40px, 8vw, 130px);
+
+  column-gap: clamp(40px, 8vw, 130px);
+  row-gap: clamp(45px, 6vh, 85px);
+
+  justify-items: stretch;
+  align-items: center;
+}
+
+/* Alle vier Felder gleich groß */
+#playerForm .name-card:not(.to-corner) {
+  width: 100%;
+  height: clamp(65px, 8vh, 90px);
+  min-width: 0;
+}
+
+/* Namen */
+#playerForm .name-card input {
+  width: 90%;
+  min-width: 0;
+  font-size: clamp(1rem, 2vw, 1.5rem);
+}
+
+/* Spieler-Beschriftungen */
+#playerForm .name-card label {
+  font-size: clamp(0.8rem, 1.3vw, 1rem);
+}
+
+/* Start-Button mittig */
+#playerForm #startBtn {
+  display: block;
+  margin: 0 auto;
+  min-width: 180px;
+}
+
+/* ==========================================
+   TABLET
+   ========================================== */
+@media (max-width: 900px) {
+  main:has(#playerForm:not(.gone)) {
+    padding: 120px 24px 70px;
+  }
+
+  #playerForm .cards {
+    width: min(100%, 650px);
+    -moz-column-gap: 45px;
+    column-gap: 45px;
+    row-gap: 55px;
+  }
+}
+
+/* ==========================================
+   SMARTPHONE
+   ========================================== */
+@media (max-width: 600px) {
+  main:has(#playerForm:not(.gone)) {
+    min-height: 100vh;
+    min-height: 100dvh;
+    margin-top: 0;
+    padding: 110px 20px 80px;
+  }
+
+  main:has(#playerForm:not(.gone)) h2 {
+    margin: 0 0 2.5rem;
+    font-size: clamp(1.35rem, 5vw, 1.8rem);
+  }
+
+  #playerForm {
+    gap: 2.5rem;
+  }
+
+  #playerForm .cards {
+    width: min(100%, 360px);
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 42px;
+    -moz-column-gap: 0;
+    column-gap: 0;
+  }
+
+  #playerForm .name-card:not(.to-corner) {
+    width: 100%;
+    height: 65px;
+  }
+
+  #playerForm .name-card input {
+    font-size: 1.15rem;
+  }
+
+  #playerForm #startBtn {
+    min-width: 170px;
+  }
+}
+
+/* Kleine Bildschirmhöhen */
+@media (max-height: 650px) {
+  main:has(#playerForm:not(.gone)) {
+    justify-content: flex-start;
   }
 }
