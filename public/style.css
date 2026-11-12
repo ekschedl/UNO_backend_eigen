@@ -53,6 +53,23 @@ body.theme-xmas .name-card input::placeholder {
   caret-color: #15354b;
 }
 
+/* Im Hochformat bleiben die Tannen beim Scrollen im sichtbaren Bereich. */
+@media (max-aspect-ratio: 4/5) {
+  body.theme-xmas {
+    --bg-pattern: none;
+    isolation: isolate;
+  }
+
+  body.theme-xmas::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: url("winterwald-hochformat.webp") center / cover no-repeat;
+    pointer-events: none;
+  }
+}
+
 /* ===== 🌲 WOOD THEME======================= */
 /*wenn body die Klasse .theme-wood hat (wird in JS umgeschaltet) -> heller, brauner Holzhintergrund  */
 body.theme-wood {
