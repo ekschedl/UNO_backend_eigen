@@ -1,4 +1,6 @@
-# NowaUno
+# UNO_backend_eigen
+
+## NowaUno
 
 Ziel des Projekts ist es ein funktionierendes UNO Front-End zum bestehenden Backend zu entwicklen. Die Kommunikation zur Backend-Spiellogik wird über eine - in den Kursunterlagen zur Verfügung gestellte - API abgewickelt.
 
